@@ -1,5 +1,6 @@
 package com.mobilele.services;
 
+import com.mobilele.utils.mapper.UserMapper;
 import com.mobilele.models.dtos.UserLoginDto;
 import com.mobilele.models.dtos.UserRegisterModel;
 import com.mobilele.models.entities.User;
@@ -18,12 +19,15 @@ public class UserService {
     private final UserRepository userRepository;
     private CurrentUser currentUser;
     private PasswordEncoder passwordEncoder;
+    private UserMapper userMapper;
     private Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
-    public UserService(UserRepository userRepository, CurrentUser currentUser, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, CurrentUser currentUser,
+                       PasswordEncoder passwordEncoder, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.currentUser = currentUser;
         this.passwordEncoder = passwordEncoder;
+        this.userMapper = userMapper;
     }
 
 
@@ -58,11 +62,8 @@ public class UserService {
     }
 
     public void registerAndLogin (UserRegisterModel userRegisterModel) {
-       User newUser = new User();
-       newUser.setActive(true);
-       newUser.setUsername(userRegisterModel.getUsername());
-       newUser.setFirstName(userRegisterModel.getFirstName());
-       newUser.setLastName(userRegisterModel.getLastName());
+
+       User newUser = userMapper.userModelToUser(userRegisterModel);
        newUser.setPassword(passwordEncoder.encode(userRegisterModel.getPassword()));
 
        newUser = userRepository.save(newUser);

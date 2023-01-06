@@ -41,6 +41,7 @@ public class UserRegistrationController {
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
+            System.out.println(userModel);
             return "redirect:/users/register";
         }
         userService.registerAndLogin(userModel);
