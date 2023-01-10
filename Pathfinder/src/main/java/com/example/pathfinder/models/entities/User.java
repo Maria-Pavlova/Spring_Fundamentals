@@ -13,19 +13,18 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = false)
     private String fullName;
 
     private int age;
-
-    @Transient
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -39,4 +38,14 @@ public class User extends BaseEntity{
 
 //    @OneToMany(mappedBy = "author", targetEntity = Comment.class)
 //    private Set<Comment> comments;
+
+
+    public User(String username, String fullName, int age, String email, String password) {
+        this();
+        this.username = username;
+        this.fullName = fullName;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+    }
 }
