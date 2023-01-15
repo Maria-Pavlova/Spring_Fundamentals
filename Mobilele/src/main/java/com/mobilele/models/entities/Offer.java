@@ -40,7 +40,7 @@ public class Offer {
         private Integer mileage;
 
         @Column(nullable = false)
-        private BigDecimal price;
+        private Integer price;
 
         @Enumerated(EnumType.STRING)
         private Transmission transmission;

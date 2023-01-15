@@ -5,6 +5,7 @@ import com.example.pathfinder.models.dto.UserRegistrationDto;
 import com.example.pathfinder.models.entities.User;
 import com.example.pathfinder.repositories.UserRepository;
 import com.example.pathfinder.user.CurrentUser;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final CurrentUser currentUser;
+    private final ModelMapper modelMapper;
     private Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
-    public UserService(UserRepository userRepository, CurrentUser currentUser) {
+    public UserService(UserRepository userRepository, CurrentUser currentUser, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.currentUser = currentUser;
+        this.modelMapper = modelMapper;
     }
 
     public void registerUser(UserRegistrationDto userRegistrationDto){
@@ -32,16 +35,11 @@ public class UserService {
         Optional<User> byEmail = userRepository.findByEmail(userRegistrationDto.getEmail());
 
         if (byEmail.isPresent()) {
-            throw new RuntimeException("User with email {} is present.");
+            throw new RuntimeException("User with email [{}] is present.");
         }
 
-        User user = new User(userRegistrationDto.getUsername(),
-                userRegistrationDto.getFullname(),
-                userRegistrationDto.getAge(),
-                userRegistrationDto.getEmail(),
-                userRegistrationDto.getPassword());
-        userRepository.save(user);
-
+        userRepository.save(modelMapper.map(userRegistrationDto, User.class));
+        LOGGER.info("User with name [{}] registered.", userRegistrationDto.getUsername());
         }
 
     public void loginUser(UserLoginDto userLoginDto) {
@@ -50,6 +48,8 @@ public class UserService {
 
         if (optionalUser.isPresent()){
             login(optionalUser.get());
+            LOGGER.info("User with name [{}] logged in.", userLoginDto.getUsername());
+
         }else {
             LOGGER.info("User with name [{}] not found.", userLoginDto.getUsername());
             logout();
