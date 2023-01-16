@@ -25,7 +25,7 @@ public class AddOfferModel {
     private Engine engine;
     @NotNull
     private Transmission transmission;
-    @NotEmpty
+    @NotBlank
     private String imageUrl;
     @NotNull
     @Min(1900)
@@ -34,7 +34,7 @@ public class AddOfferModel {
     @NotNull
     @Positive
     private Integer mileage;
-    @NotEmpty
+    @NotBlank
     private String description;
 
     public Long getModelId() {

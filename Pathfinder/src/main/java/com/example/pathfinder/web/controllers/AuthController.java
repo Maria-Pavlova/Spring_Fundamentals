@@ -1,5 +1,6 @@
 package com.example.pathfinder.web.controllers;
 
+import com.example.pathfinder.models.dto.UserDetailsDto;
 import com.example.pathfinder.models.dto.UserLoginDto;
 import com.example.pathfinder.models.dto.UserRegistrationDto;
 import com.example.pathfinder.service.UserService;
@@ -52,5 +53,13 @@ public class AuthController {
     public String loginConfirm(UserLoginDto userLoginDto){
         userService.loginUser(userLoginDto);
         return "redirect:/";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model){
+        model.addAttribute("userDetailsDto", new UserDetailsDto());
+        return "profile";
+        //TODO
+
     }
 }

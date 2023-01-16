@@ -2,6 +2,7 @@ package com.mobilele.services;
 
 import com.mobilele.models.dtos.AddOfferModel;
 import com.mobilele.models.dtos.BrandDto;
+import com.mobilele.models.dtos.views.OffersView;
 import com.mobilele.models.entities.Model;
 import com.mobilele.models.entities.Offer;
 import com.mobilele.models.entities.User;
@@ -40,18 +41,28 @@ public class OfferService {
 
         Offer newOffer = modelMapper.map(addOfferModel, Offer.class);
         // Offer newOffer =
-                //offerMapper.addOfferModelToOffer(addOfferModel);
-    //TODO check current user logged in
+        //offerMapper.addOfferModelToOffer(addOfferModel);
+        //TODO check current user logged in
         User user = userRepository.findByUsername(currentUser.getUsername())
                 .orElseThrow();
 
-       Model model = modelRepository.findById(addOfferModel.getModelId())
+        Model model = modelRepository.findById(addOfferModel.getModelId())
                 .orElseThrow();
 
-       newOffer.setModel(model);
-       newOffer.setSeller(user);
+        newOffer.setModel(model);
+        newOffer.setSeller(user);
 
-       offerRepository.save(newOffer);
+        offerRepository.save(newOffer);
     }
 
+    public List<OffersView> getAllOffers() {
+        return offerRepository.findAll()
+                .stream()
+                .map(offer -> {
+                    OffersView view = modelMapper.map(offer, OffersView.class);
+                    view.setModel(offer.getModel().getName());
+                    return view;
+                })
+                .toList();
+    }
 }

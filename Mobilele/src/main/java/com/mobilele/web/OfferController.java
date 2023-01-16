@@ -7,10 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -27,11 +24,18 @@ public class OfferController {
 
 
     @GetMapping("/offers/all")
-    public String allOffers(){
+    public String allOffers(Model model){
+        model.addAttribute("offers", offerService.getAllOffers());
         return "offers";
     }
 
-    @GetMapping("/offers/add")
+    @GetMapping("/offers{id}/details")
+    public String offerDetails(@PathVariable String id){
+        return "details";
+
+    }
+
+    @GetMapping("offers/add")
     public String addOffer(Model model){
         if (!model.containsAttribute("addOfferModel")){
             model.addAttribute("addOfferModel", new AddOfferModel());
@@ -40,10 +44,8 @@ public class OfferController {
         return "offer-add";
     }
 
-    @PostMapping("/offers/add")
-    public String addOfferConfirm(@Valid
-                                      @ModelAttribute("addOfferModel")
-                                              AddOfferModel addOfferModel,
+    @PostMapping("offers/add")
+    public String addOfferConfirm(@Valid AddOfferModel addOfferModel,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes){
 

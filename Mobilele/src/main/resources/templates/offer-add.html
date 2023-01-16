@@ -26,7 +26,8 @@
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="modelId">Model</label>
+                <label class="text-center text-white font-weight-bold"
+                       for="modelId">Model</label>
                 <select id="modelId"
                         name="modelId"
                         th:errorclass="is-invalid"
@@ -43,7 +44,7 @@
                         </option>
                     </optgroup>
                 </select>
-                <p class="is-invalid errors alert alert-danger">
+                <p class="is-invalid invalid-feedback errors alert alert-danger">
                     Vechicle model is required.
                 </p>
             </div>
@@ -55,7 +56,7 @@
                        th:errorclass="is-invalid"
                        type="number" min="0" step="100" class="form-control"
                        placeholder="Suggested price"/>
-                <p  class="is-invalid errors alert alert-danger">
+                <p  class="is-invalid invalid-feedback errors alert alert-danger">
                     Suggested price is required.
                 </p>
             </div>
@@ -107,7 +108,7 @@
                        th:errorclass="is-invalid"
                        type="number" min="1900" max="2099" step="1" class="form-control"
                        placeholder="Manufacturing year"/>
-                <p class="is-invalid errors alert alert-danger">
+                <p class="is-invalid invalid-feedback errors alert alert-danger">
                     Manufacturing year is required.
                 </p>
             </div>
@@ -117,11 +118,10 @@
                        name="mileage"
                        th:field="*{mileage}"
                        th:errorclass="is-invalid"
-                       type="number"
-<!--                       min="0" max="900000" step="1000"-->
+                       type="number" min="0" max="900000" step="1000"
                        class="form-control"
                        placeholder="Mileage in kilometers"/>
-                <p class="is-invalid errors alert alert-danger">
+                <p class="is-invalid invalid-feedback errors alert alert-danger">
                     Mileage in kilometers is required.
                 </p>
             </div>
@@ -135,7 +135,7 @@
                       th:errorclass="is-invalid"
                       type="textarea" class="form-control" rows="3"
                       placeholder="Description"></textarea>
-            <p class="is-invalid errors alert alert-danger">
+            <p class="is-invalid invalid-feedback errors alert alert-danger">
                 Description is required.
             </p>
         </div>
@@ -147,7 +147,7 @@
                    th:errorclass="is-invalid"
                    type="url" class="form-control"
                    placeholder="Put vehicle image URL here">
-            <p class="is-invalid errors alert alert-danger">
+            <p class="is-invalid invalid-feedback errors alert alert-danger">
                 Vehicle image URL is required.
             </p>
         </div>
