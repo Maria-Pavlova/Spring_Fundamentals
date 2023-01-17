@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -38,6 +40,7 @@ public class User extends BaseEntity{
     private boolean isActive;
 
     @ManyToMany
+    @Fetch(FetchMode.JOIN)
     private Set<UserRole> roles = new HashSet<>();
 
     @Column(name = "image_url")

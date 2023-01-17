@@ -2,6 +2,7 @@ package com.mobilele.services;
 
 import com.mobilele.models.dtos.AddOfferModel;
 import com.mobilele.models.dtos.BrandDto;
+import com.mobilele.models.dtos.views.OfferDetailsDto;
 import com.mobilele.models.dtos.views.OffersView;
 import com.mobilele.models.entities.Model;
 import com.mobilele.models.entities.Offer;
@@ -61,8 +62,25 @@ public class OfferService {
                 .map(offer -> {
                     OffersView view = modelMapper.map(offer, OffersView.class);
                     view.setModel(offer.getModel().getName());
+                    view.setBrand(offer.getModel().getBrand().getName());
                     return view;
                 })
                 .toList();
+    }
+
+    public OfferDetailsDto findById(String id) {
+     return offerRepository.findById(id)
+                .map(offer -> {
+                    OfferDetailsDto detailsDto = modelMapper.map(offer, OfferDetailsDto.class);
+                    detailsDto.setSeller(offer.getSeller().getFirstName()+" "+ offer.getSeller().getLastName());
+                    detailsDto.setModel(offer.getModel().getName());
+                    detailsDto.setBrand(offer.getModel().getBrand().getName());
+                    return detailsDto;
+                }).get();
+
+    }
+
+    public void deleteOffer(String id) {
+        offerRepository.deleteById(id);
     }
 }

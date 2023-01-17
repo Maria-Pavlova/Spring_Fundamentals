@@ -16,4 +16,10 @@ public class OffersView implements Serializable {
     private Transmission transmission;
     private Integer year;
     private String model;
+    private String brand;
+    private String seller;
+
+    public String getOfferHighlight() {
+        return this.brand + " " + this.model + " - " + this.year;
+    }
 }

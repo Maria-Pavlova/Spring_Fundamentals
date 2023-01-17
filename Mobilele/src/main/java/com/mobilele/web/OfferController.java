@@ -30,7 +30,8 @@ public class OfferController {
     }
 
     @GetMapping("/offers{id}/details")
-    public String offerDetails(@PathVariable String id){
+    public String offerDetails(@PathVariable String id, Model model){
+        model.addAttribute("details", offerService.findById(id));
         return "details";
 
     }
@@ -56,6 +57,11 @@ public class OfferController {
             return "redirect:/offers/add";
         }
         offerService.addOffer(addOfferModel);
+        return "redirect:/offers/all";
+    }
+    @DeleteMapping("/offers{id}")
+    public String deleteOffer(@PathVariable String id){
+        offerService.deleteOffer(id);
         return "redirect:/offers/all";
     }
 }
