@@ -1,7 +1,9 @@
 package com.mobilele.services;
 
+import com.mobilele.exceptions.ObjectNotFoundException;
 import com.mobilele.models.dtos.AddOfferModel;
 import com.mobilele.models.dtos.BrandDto;
+import com.mobilele.models.dtos.OfferUpdateModel;
 import com.mobilele.models.dtos.views.OfferDetailsDto;
 import com.mobilele.models.dtos.views.OffersView;
 import com.mobilele.models.entities.Model;
@@ -82,5 +84,20 @@ public class OfferService {
 
     public void deleteOffer(String id) {
         offerRepository.deleteById(id);
+    }
+
+    public void updateOffer(OfferUpdateModel updateModel) {
+        Offer offer = offerRepository.findById(updateModel.getId()).orElseThrow(() ->
+                new ObjectNotFoundException("Offer with id " + updateModel.getId() + "not found"));
+        offer.setPrice(updateModel.getPrice());
+        offer.setYear(updateModel.getYear());
+        offer.setEngine(updateModel.getEngine());
+        offer.setImageUrl(updateModel.getImageUrl());
+        offer.setMileage(updateModel.getMileage());
+        offer.setTransmission(updateModel.getTransmission());
+        offer.setDescription(updateModel.getDescription());
+
+        offerRepository.save(offer);
+
     }
 }

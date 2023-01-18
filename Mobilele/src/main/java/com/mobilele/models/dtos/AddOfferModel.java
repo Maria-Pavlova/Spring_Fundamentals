@@ -30,7 +30,7 @@ public class AddOfferModel {
     @NotNull
     @Min(1900)
     @Max(2050)
-    private int year;
+    private Integer year;
     @NotNull
     @Positive
     private Integer mileage;

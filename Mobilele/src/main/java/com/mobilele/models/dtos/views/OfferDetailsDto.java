@@ -22,7 +22,7 @@ public class OfferDetailsDto implements Serializable {
     private LocalDateTime modified;
     private String imageUrl;
     private String seller;
-    private int year;
+    private Integer year;
     private String model;
     private String brand;
 
