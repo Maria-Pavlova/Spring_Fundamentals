@@ -34,14 +34,13 @@ public class UserRegistrationController {
     }
 
     @PostMapping("/register")
-    public String registerConfirm(@Valid UserRegisterModel userModel,
+    public String register(@Valid UserRegisterModel userModel,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes){
 
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
-            System.out.println(userModel);
             return "redirect:/users/register";
         }
         userService.registerAndLogin(userModel);

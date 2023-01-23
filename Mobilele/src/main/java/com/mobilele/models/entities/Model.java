@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "models")
 public class Model extends BaseEntity{
@@ -26,10 +25,19 @@ public class Model extends BaseEntity{
     private Integer startYear;
     @Column(name = "end_year")
     private Integer endYear;
-    private LocalDateTime created;
-    private LocalDateTime modified;
     @ManyToOne
     private Brand brand;
+
+    public Model(String name, Category category, String imageUrl, Integer startYear, Integer endYear, Brand brand) {
+        this.name = name;
+        this.category = category;
+        this.imageUrl = imageUrl;
+        this.startYear = startYear;
+        this.endYear = endYear;
+        this.brand = brand;
+    }
+
+
 
 
     @Override
@@ -40,8 +48,6 @@ public class Model extends BaseEntity{
                 ", imageUrl='" + imageUrl + '\'' +
                 ", startYear=" + startYear +
                 ", endYear=" + endYear +
-                ", created=" + created +
-                ", modified=" + modified +
                 ", brand=" + (brand != null ? brand.getName() : null) +
                 '}';
     }

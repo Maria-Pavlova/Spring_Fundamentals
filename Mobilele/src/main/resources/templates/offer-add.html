@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -18,13 +20,11 @@
 
 <div class="container">
     <h2 class="text-center text-white">Upload Offer</h2>
-    <form
-            th:action="@{offers/add}"
-            th:method="post"
-            th:object="${addOfferModel}"
+    <form th:action="@{offers/add}"
+          th:method="post"
+          th:object="${addOfferModel}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
-
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold"
                        for="modelId">Model</label>
@@ -44,7 +44,7 @@
                         </option>
                     </optgroup>
                 </select>
-                <p class="is-invalid invalid-feedback errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Vechicle model is required.
                 </p>
             </div>
@@ -56,7 +56,7 @@
                        th:errorclass="is-invalid"
                        type="number" min="0" step="100" class="form-control"
                        placeholder="Suggested price"/>
-                <p  class="is-invalid invalid-feedback errors alert alert-danger">
+                <p  class="invalid-feedback errors alert alert-danger">
                     Suggested price is required.
                 </p>
             </div>
@@ -108,7 +108,7 @@
                        th:errorclass="is-invalid"
                        type="number" min="1900" max="2099" step="1" class="form-control"
                        placeholder="Manufacturing year"/>
-                <p class="is-invalid invalid-feedback errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Manufacturing year is required.
                 </p>
             </div>
@@ -121,7 +121,7 @@
                        type="number" min="0" max="900000" step="1000"
                        class="form-control"
                        placeholder="Mileage in kilometers"/>
-                <p class="is-invalid invalid-feedback errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Mileage in kilometers is required.
                 </p>
             </div>
@@ -135,7 +135,7 @@
                       th:errorclass="is-invalid"
                       type="textarea" class="form-control" rows="3"
                       placeholder="Description"></textarea>
-            <p class="is-invalid invalid-feedback errors alert alert-danger">
+            <p class="invalid-feedback errors alert alert-danger">
                 Description is required.
             </p>
         </div>
@@ -147,7 +147,7 @@
                    th:errorclass="is-invalid"
                    type="url" class="form-control"
                    placeholder="Put vehicle image URL here">
-            <p class="is-invalid invalid-feedback errors alert alert-danger">
+            <p class="invalid-feedback errors alert alert-danger">
                 Vehicle image URL is required.
             </p>
         </div>

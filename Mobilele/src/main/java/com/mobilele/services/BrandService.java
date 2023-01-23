@@ -19,6 +19,13 @@ public class BrandService {
         this.brandRepository = brandRepository;
     }
 
+
+    public void dbInit(){
+        if (brandRepository.count() == 0){
+
+        }
+    }
+
     public List<BrandDto> getAllBrands() {
         return brandRepository.findAll()
                 .stream()

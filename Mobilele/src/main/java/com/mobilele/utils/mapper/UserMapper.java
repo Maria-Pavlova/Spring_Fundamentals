@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-//    @Mapping(target = "active", constant = "true")
+    //@Mapping(target = "active", constant = "true")
     User userModelToUser(UserRegisterModel userRegisterModel);
 }

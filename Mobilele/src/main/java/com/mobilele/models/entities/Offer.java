@@ -46,11 +46,7 @@ public class Offer {
         private Transmission transmission;
 
         @Column(nullable = false)
-        private int year;
-
-        private LocalDateTime created;
-
-        private LocalDateTime modified;
+        private Integer year;
 
         @ManyToOne
         private Model model;

@@ -13,8 +13,9 @@ import java.math.BigDecimal;
 //@Getter
 //@Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class AddOfferModel {
+    private Long id;
     @NotNull
     @Positive
     private Long modelId;
@@ -25,7 +26,7 @@ public class AddOfferModel {
     private Engine engine;
     @NotNull
     private Transmission transmission;
-    @NotBlank
+    @NotNull
     private String imageUrl;
     @NotNull
     @Min(1900)
@@ -34,7 +35,7 @@ public class AddOfferModel {
     @NotNull
     @Positive
     private Integer mileage;
-    @NotBlank
+    @NotNull
     private String description;
 
     public Long getModelId() {

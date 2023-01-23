@@ -19,10 +19,6 @@ public class Brand extends BaseEntity{
     @Column(nullable = false)
     private String name;
 
-    private LocalDateTime created;
-
-    private LocalDateTime modified;
-
     @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Model> models;
 
@@ -30,8 +26,6 @@ public class Brand extends BaseEntity{
     public String toString() {
         return "Brand{" +
                 "name='" + name + '\'' +
-                ", created=" + created +
-                ", modified=" + modified +
                 ", models=" + models +
                 '}';
     }
