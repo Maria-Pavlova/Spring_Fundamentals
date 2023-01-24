@@ -1,9 +1,6 @@
 package com.example.pathfinder.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +21,7 @@ public class Comment extends BaseEntity{
     private LocalDateTime created;
 
     @Lob
+    @Column(name = "text_content")
     private String textContent;
 
     @ManyToOne

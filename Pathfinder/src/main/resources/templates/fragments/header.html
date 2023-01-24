@@ -1,5 +1,4 @@
 <header>
-
     <th:block th:if="${@currentUser.username == null}" th:include="~{/fragments/guest-nav}" />
     <th:block th:if="${@currentUser.username != null}" th:include="~{/fragments/logged-nav}"/>
 </header>

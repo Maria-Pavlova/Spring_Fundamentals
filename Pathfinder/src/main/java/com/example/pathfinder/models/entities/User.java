@@ -21,20 +21,31 @@ public class User extends BaseEntity {
     private String username;
 
     @Column(nullable = false)
-    private String fullName;
+    private String password;
 
-    private int age;
     @Column(nullable = false)
     private String email;
-
-    @Column(nullable = false)
-    private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     private Level level;
+
+
+
+
+    @Column(nullable = false)
+    private String fullName;
+
+    private int age;
+
+
+
+
+
+
+
 
 //    @OneToMany(mappedBy = "author", targetEntity = Comment.class)
 //    private Set<Comment> comments;

@@ -2,7 +2,7 @@ package com.example.pathfinder.models.entities;
 
 import com.example.pathfinder.models.enums.Level;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +13,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "routes")
 public class Route extends BaseEntity{

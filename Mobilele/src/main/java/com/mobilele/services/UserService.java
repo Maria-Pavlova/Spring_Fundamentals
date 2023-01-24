@@ -56,6 +56,7 @@ public class UserService {
 
         if (success){
             login(optionalUser.get());
+            LOGGER.info("User with name [{}] logged in.", loginDto.getUsername());
         }else {
             logout();
         }
@@ -88,5 +89,16 @@ public class UserService {
 
        newUser = userRepository.save(newUser);
        login(newUser);
+    }
+
+    public boolean isAuthenticate(UserLoginDto userLoginDto){
+        Optional<User> optionalUser = userRepository.findByUsername(userLoginDto.getUsername());
+        if (optionalUser.isPresent()){
+            String  rawPassword = userLoginDto.getPassword();
+            String  encodedPassword  = optionalUser.get().getPassword();
+            return passwordEncoder.matches(rawPassword, encodedPassword);
+        }
+       return false;
+
     }
 }
