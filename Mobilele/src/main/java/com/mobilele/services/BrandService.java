@@ -2,9 +2,12 @@ package com.mobilele.services;
 
 import com.mobilele.models.dtos.BrandDto;
 import com.mobilele.models.dtos.ModelDto;
+import com.mobilele.models.dtos.views.AllBrandsView;
 import com.mobilele.models.entities.Brand;
 import com.mobilele.models.entities.Model;
 import com.mobilele.repositories.BrandRepository;
+import com.mobilele.repositories.ModelRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,17 +16,28 @@ import java.util.stream.Collectors;
 @Service
 public class BrandService {
 
-    private BrandRepository brandRepository;
+    private final BrandRepository brandRepository;
+    private final ModelRepository modelRepository;
+    private final ModelMapper modelMapper;
 
-    public BrandService(BrandRepository brandRepository) {
+    public BrandService(BrandRepository brandRepository, ModelRepository modelRepository, ModelMapper modelMapper) {
         this.brandRepository = brandRepository;
+        this.modelRepository = modelRepository;
+        this.modelMapper = modelMapper;
     }
 
+//
+//    public void dbInit(){
+//        if (brandRepository.count() == 0){
+//
+//        }
+ //   }
 
-    public void dbInit(){
-        if (brandRepository.count() == 0){
-
-        }
+    public List<AllBrandsView> getBrands(){
+        return brandRepository.findAll()
+                .stream()
+                .map(brand -> modelMapper.map(brand, AllBrandsView.class))
+                .collect(Collectors.toList());
     }
 
     public List<BrandDto> getAllBrands() {

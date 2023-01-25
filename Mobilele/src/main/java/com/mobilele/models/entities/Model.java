@@ -28,13 +28,13 @@ public class Model extends BaseEntity{
     @ManyToOne
     private Brand brand;
 
-    public Model(String name, Category category, String imageUrl, Integer startYear, Integer endYear, Brand brand) {
+    public Model(String name, Category category, Integer startYear, Integer endYear, String imageUrl) {
         this.name = name;
         this.category = category;
-        this.imageUrl = imageUrl;
         this.startYear = startYear;
         this.endYear = endYear;
-        this.brand = brand;
+        this.imageUrl = imageUrl;
+//        this.brand = brand;
     }
 
 

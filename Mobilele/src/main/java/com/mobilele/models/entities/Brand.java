@@ -22,6 +22,19 @@ public class Brand extends BaseEntity{
     @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Model> models;
 
+    public Brand(String name) {
+        this.name=name;
+    }
+
+
+    public static Brand create(String name, Set<Model> models) {
+        Brand brand = new Brand(name);
+        models.stream().forEach(model -> {
+            model.setBrand(brand);
+            brand.getModels().add(model);
+        });
+        return brand;
+    }
     @Override
     public String toString() {
         return "Brand{" +
@@ -29,4 +42,5 @@ public class Brand extends BaseEntity{
                 ", models=" + models +
                 '}';
     }
+
 }
