@@ -72,7 +72,7 @@ public class UserService {
                 .collect(Collectors.toList());
 
         currentUser.setLoggedIn(true);
-        currentUser.setUsername(user.getFirstName() + " " + user.getLastName());
+        currentUser.setUsername(user.getUsername());
         currentUser.setUserRoles(roles);
     }
 

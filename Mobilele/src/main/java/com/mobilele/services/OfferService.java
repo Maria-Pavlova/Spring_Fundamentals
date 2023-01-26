@@ -45,13 +45,10 @@ public class OfferService {
         Offer newOffer = modelMapper.map(addOfferModel, Offer.class);
         // Offer newOffer =
         //offerMapper.addOfferModelToOffer(addOfferModel);
-        //TODO check current user logged in
-        User user = userRepository.findByUsername(currentUser.getUsername())
-                .orElseThrow();
 
-        Model model = modelRepository.findById(addOfferModel.getModelId())
-                .orElseThrow();
-
+        User user = userRepository.findByUsername(currentUser.getUsername()).orElse(null);
+        Model model = modelRepository.findById(addOfferModel.getModelId()).orElseThrow();
+    //    newOffer.setId(null);
         newOffer.setModel(model);
         newOffer.setSeller(user);
 

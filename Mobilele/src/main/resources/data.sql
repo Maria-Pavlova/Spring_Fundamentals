@@ -7,7 +7,7 @@
 --INSERT INTO brands (id, name)
 --VALUES (1, 'BMW'),(2, 'Opel');
 
-
+--
 --INSERT INTO models (name, category, start_year, end_year, image_url, brand_id)
 --VALUES ("Z4", 'CAR', 2002, null, "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/2011_BMW_Z4_sDrive23i_M_Sport_Highline_2.5.jpg/560px-2011_BMW_Z4_sDrive23i_M_Sport_Highline_2.5.jpg", 1),
 --("X3", 'CAR', 2003, null, "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/2018_BMW_X3_xDrive20d_SE_Automatic_2.0_Front.jpg/560px-2018_BMW_X3_xDrive20d_SE_Automatic_2.0_Front.jpg", 1),

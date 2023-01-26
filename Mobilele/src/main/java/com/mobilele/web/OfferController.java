@@ -31,33 +31,40 @@ public class OfferController {
 
 
     @GetMapping("/offers/all")
-    public String allOffers(Model model){
+    public String allOffers(Model model) {
         model.addAttribute("offers", offerService.getAllOffers());
         return "offers";
     }
 
     @GetMapping("/offers{id}/details")
-    public String offerDetails(@PathVariable String id, Model model){
+    public String offerDetails(@PathVariable String id, Model model) {
         model.addAttribute("details", offerService.findById(id));
         return "details";
 
     }
 
-    @GetMapping("offers/add")
-    public String addOffer(Model model){
-        if (!model.containsAttribute("addOfferModel")){
-            model.addAttribute("addOfferModel", new AddOfferModel());
-        }
+    @ModelAttribute("addOfferModel")
+    public AddOfferModel addOfferModel() {
+        return new AddOfferModel();
+    }
+
+    @GetMapping("/offers/add")
+    public String getAddOffer(Model model) {
+//        if (!model.containsAttribute("addOfferModel")){
+//            model.addAttribute("addOfferModel", new AddOfferModel());
+//        }
         model.addAttribute("brands", brandService.getAllBrands());
+        model.addAttribute("engines", Engine.values());
+        model.addAttribute("transmissions", Transmission.values());
         return "offer-add";
     }
 
-    @PostMapping("offers/add")
-    public String addOfferConfirm(@Valid AddOfferModel addOfferModel,
-                                  BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes){
-
-        if (bindingResult.hasErrors()){
+    @PostMapping("/offers/add")
+    public String addOffer(@Valid AddOfferModel addOfferModel,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes){
+        System.out.println(addOfferModel);
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addOfferModel", addOfferModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addOfferModel", bindingResult);
             return "redirect:/offers/add";
@@ -67,13 +74,13 @@ public class OfferController {
     }
 
     @DeleteMapping("/offers{id}")
-    public String deleteOffer(@PathVariable String id){
+    public String deleteOffer(@PathVariable String id) {
         offerService.deleteOffer(id);
         return "redirect:/offers/all";
     }
 
     @GetMapping("/offers{id}/update")
-    public String updateOffer(@PathVariable String id, Model model){
+    public String updateOffer(@PathVariable String id, Model model) {
         OfferDetailsDto detailsDto = offerService.findById(id);
         OfferUpdateModel updateModel = modelMapper.map(detailsDto, OfferUpdateModel.class);
         updateModel.setId(id);
@@ -84,7 +91,7 @@ public class OfferController {
     }
 
     @GetMapping("/offers{id}/update/errors")
-    public String updateOfferErrors(@PathVariable String id, Model model){
+    public String updateOfferErrors(@PathVariable String id, Model model) {
         model.addAttribute("engines", Engine.values());
         model.addAttribute("transmissions", Transmission.values());
         return "update";
@@ -95,9 +102,9 @@ public class OfferController {
     public String updateOffer(@PathVariable String id,
                               @Valid OfferUpdateModel updateModel,
                               BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes){
+                              RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("updateModel", updateModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.updateModel", bindingResult);
             return "redirect:/offers" + id + "/update/errors";

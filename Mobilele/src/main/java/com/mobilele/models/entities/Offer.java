@@ -20,12 +20,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "offers")
-public class Offer {
+public class Offer extends BaseEntity {
 
-        @Id
-        @GeneratedValue(generator = "UUID")
-        @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-        private String id;
+//        @Id
+//        @GeneratedValue(generator = "UUID")
+//        @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+//        private String id;
 
         @Column(columnDefinition = "TEXT")
         private String description;

@@ -12,17 +12,23 @@ import java.util.List;
 
 @Component
 @SessionScope
-@Getter
-//@Setter
 public class CurrentUser {
 
     private String username;
     private boolean loggedIn;
     private List<Role> userRoles = new ArrayList<>();
 
-    public void clear(){
-        loggedIn = false;
-        username = null;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public List<Role> getUserRoles() {
+        return userRoles;
     }
 
     public CurrentUser setUserRoles(List<Role> newUserRoles){
@@ -42,6 +48,10 @@ public class CurrentUser {
        }
         this.loggedIn = loggedIn;
         return this;
+    }
+    public void clear(){
+        loggedIn = false;
+        username = null;
     }
 
     public boolean isAnonymous(){

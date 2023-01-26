@@ -26,12 +26,6 @@ public class BrandService {
         this.modelMapper = modelMapper;
     }
 
-//
-//    public void dbInit(){
-//        if (brandRepository.count() == 0){
-//
-//        }
- //   }
 
     public List<AllBrandsView> getBrands(){
         return brandRepository.findAll()
