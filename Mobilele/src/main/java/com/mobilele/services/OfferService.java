@@ -1,9 +1,8 @@
 package com.mobilele.services;
 
 import com.mobilele.exceptions.ObjectNotFoundException;
-import com.mobilele.models.dtos.AddOfferModel;
-import com.mobilele.models.dtos.BrandDto;
-import com.mobilele.models.dtos.OfferUpdateModel;
+import com.mobilele.models.dtos.bindingModels.AddOfferModel;
+import com.mobilele.models.dtos.bindingModels.OfferUpdateModel;
 import com.mobilele.models.dtos.views.OfferDetailsDto;
 import com.mobilele.models.dtos.views.OffersView;
 import com.mobilele.models.entities.Model;
@@ -46,9 +45,9 @@ public class OfferService {
         // Offer newOffer =
         //offerMapper.addOfferModelToOffer(addOfferModel);
 
-        User user = userRepository.findByUsername(currentUser.getUsername()).orElse(null);
+        User user = userRepository.findByUsername(currentUser.getUsername()).orElseThrow();
         Model model = modelRepository.findById(addOfferModel.getModelId()).orElseThrow();
-    //    newOffer.setId(null);
+
         newOffer.setModel(model);
         newOffer.setSeller(user);
 

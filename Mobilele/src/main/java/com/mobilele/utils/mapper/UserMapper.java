@@ -1,9 +1,8 @@
 package com.mobilele.utils.mapper;
 
-import com.mobilele.models.dtos.UserRegisterModel;
+import com.mobilele.models.dtos.bindingModels.UserRegisterModel;
 import com.mobilele.models.entities.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 
 @Mapper(componentModel = "spring")

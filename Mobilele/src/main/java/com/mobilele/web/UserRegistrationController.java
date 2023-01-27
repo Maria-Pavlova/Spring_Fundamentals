@@ -1,6 +1,6 @@
 package com.mobilele.web;
 
-import com.mobilele.models.dtos.UserRegisterModel;
+import com.mobilele.models.dtos.bindingModels.UserRegisterModel;
 
 import com.mobilele.services.UserService;
 import jakarta.validation.Valid;

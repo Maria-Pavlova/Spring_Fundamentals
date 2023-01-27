@@ -1,7 +1,7 @@
 package com.mobilele.web;
 
-import com.mobilele.models.dtos.AddOfferModel;
-import com.mobilele.models.dtos.OfferUpdateModel;
+import com.mobilele.models.dtos.bindingModels.AddOfferModel;
+import com.mobilele.models.dtos.bindingModels.OfferUpdateModel;
 import com.mobilele.models.dtos.views.OfferDetailsDto;
 import com.mobilele.models.enums.Engine;
 import com.mobilele.models.enums.Transmission;
@@ -63,7 +63,7 @@ public class OfferController {
     public String addOffer(@Valid AddOfferModel addOfferModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes){
-        System.out.println(addOfferModel);
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addOfferModel", addOfferModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addOfferModel", bindingResult);

@@ -1,7 +1,7 @@
 package com.mobilele.services;
 
-import com.mobilele.models.dtos.BrandDto;
-import com.mobilele.models.dtos.ModelDto;
+import com.mobilele.models.dtos.bindingModels.BrandDto;
+import com.mobilele.models.dtos.bindingModels.ModelDto;
 import com.mobilele.models.dtos.views.AllBrandsView;
 import com.mobilele.models.entities.Brand;
 import com.mobilele.models.entities.Model;

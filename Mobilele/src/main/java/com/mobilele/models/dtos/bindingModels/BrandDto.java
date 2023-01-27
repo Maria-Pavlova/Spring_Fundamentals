@@ -1,4 +1,4 @@
-package com.mobilele.models.dtos;
+package com.mobilele.models.dtos.bindingModels;
 
 import lombok.Getter;
 import lombok.Setter;

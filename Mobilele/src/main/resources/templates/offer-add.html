@@ -52,13 +52,13 @@
                         th:field="*{price}"
                         th:errorclass="is-invalid"
                         type="number"
-                        min="0"
+                        min="100"
                         step="100"
                         class="form-control"
                         placeholder="Suggested price"
                 />
                 <p class="invalid-feedback errors alert alert-danger">
-                    Suggested price is required.
+                    Suggested price is required and should be greater than 100.
                 </p>
             </div>
         </div>
@@ -108,7 +108,7 @@
                         id="year"
                         th:field="*{year}"
                         th:errorclass="is-invalid"
-                        type="number"
+                        type="number" min="1900" max="2050"
                         step="1"
                         class="form-control"
                         placeholder="Manufacturing year"
@@ -123,7 +123,7 @@
                         id="mileage"
                         th:field="*{mileage}"
                         th:errorclass="is-invalid"
-                        type="number"
+                        type="number" min="0"
                         class="form-control"
                         placeholder="Mileage in kilometers"
                 />

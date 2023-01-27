@@ -1,4 +1,4 @@
-package com.mobilele.models.dtos;
+package com.mobilele.models.dtos.bindingModels;
 
 import com.mobilele.utils.validation.FieldsMatch;
 import com.mobilele.utils.validation.UniqueUserName;

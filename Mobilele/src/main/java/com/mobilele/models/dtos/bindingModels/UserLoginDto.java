@@ -1,4 +1,4 @@
-package com.mobilele.models.dtos;
+package com.mobilele.models.dtos.bindingModels;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

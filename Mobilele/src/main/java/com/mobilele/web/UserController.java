@@ -1,6 +1,6 @@
 package com.mobilele.web;
 
-import com.mobilele.models.dtos.UserLoginDto;
+import com.mobilele.models.dtos.bindingModels.UserLoginDto;
 import com.mobilele.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

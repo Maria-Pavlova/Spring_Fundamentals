@@ -1,7 +1,5 @@
 package com.mobilele.models.dtos.views;
 
-import com.mobilele.models.dtos.ModelDto;
-import com.mobilele.models.enums.Category;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

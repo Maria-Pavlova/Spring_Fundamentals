@@ -1,6 +1,6 @@
 package com.mobilele.utils.mapper;
 
-import com.mobilele.models.dtos.AddOfferModel;
+import com.mobilele.models.dtos.bindingModels.AddOfferModel;
 import com.mobilele.models.entities.Offer;
 import org.mapstruct.Mapper;
 

@@ -1,21 +1,16 @@
-package com.mobilele.models.dtos;
+package com.mobilele.models.dtos.bindingModels;
 
 import com.mobilele.models.enums.Engine;
 import com.mobilele.models.enums.Transmission;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.math.BigDecimal;
 
-//@Getter
-//@Setter
+
 @NoArgsConstructor
 
 public class AddOfferModel {
- //   private Long id;
+
     @NotNull
     @Positive
     private Long modelId;
@@ -26,7 +21,7 @@ public class AddOfferModel {
     private Engine engine;
     @NotNull
     private Transmission transmission;
-    @NotNull
+    @NotBlank
     private String imageUrl;
     @NotNull
     @Min(1900)
@@ -35,17 +30,9 @@ public class AddOfferModel {
     @NotNull
     @Positive
     private Integer mileage;
-    @NotNull
+    @NotBlank
     private String description;
 
-//    public Long getId() {
-//        return id;
-//    }
-
-//    public AddOfferModel setId(Long id) {
-//        this.id = id;
-//        return this;
-//    }
 
     public Long getModelId() {
         return modelId;

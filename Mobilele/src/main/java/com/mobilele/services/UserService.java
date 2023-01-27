@@ -3,8 +3,8 @@ package com.mobilele.services;
 import com.mobilele.models.entities.UserRole;
 import com.mobilele.models.enums.Role;
 import com.mobilele.utils.mapper.UserMapper;
-import com.mobilele.models.dtos.UserLoginDto;
-import com.mobilele.models.dtos.UserRegisterModel;
+import com.mobilele.models.dtos.bindingModels.UserLoginDto;
+import com.mobilele.models.dtos.bindingModels.UserRegisterModel;
 import com.mobilele.models.entities.User;
 import com.mobilele.repositories.UserRepository;
 import com.mobilele.user.CurrentUser;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
