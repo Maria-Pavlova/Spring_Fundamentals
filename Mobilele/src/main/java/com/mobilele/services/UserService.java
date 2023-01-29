@@ -79,6 +79,7 @@ public class UserService {
         currentUser.clear();
     }
 
+
     public void registerAndLogin (UserRegisterModel userRegisterModel) {
 
       // User newUser = userMapper.userModelToUser(userRegisterModel);

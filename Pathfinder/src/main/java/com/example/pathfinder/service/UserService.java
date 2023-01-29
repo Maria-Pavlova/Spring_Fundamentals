@@ -4,6 +4,7 @@ import com.example.pathfinder.models.dto.UserDetailsDto;
 import com.example.pathfinder.models.dto.UserLoginDto;
 import com.example.pathfinder.models.dto.UserRegistrationDto;
 import com.example.pathfinder.models.entities.User;
+import com.example.pathfinder.models.enums.Level;
 import com.example.pathfinder.repositories.UserRepository;
 import com.example.pathfinder.user.CurrentUser;
 import org.modelmapper.ModelMapper;
@@ -40,7 +41,9 @@ public class UserService {
             throw new RuntimeException("User with email [{}] is present.");
         }
 
-        userRepository.save(modelMapper.map(userRegistrationDto, User.class));
+        User user = modelMapper.map(userRegistrationDto, User.class);
+        user.setLevel(Level.BEGINNER);
+        userRepository.save(user);
         LOGGER.info("User with name [{}] registered.", userRegistrationDto.getUsername());
         }
 
@@ -70,7 +73,8 @@ public class UserService {
         currentUser.setUsername(user.getUsername());
     }
 
-    private void logout() {
+    public void logout() {
+        LOGGER.info("User with name [{}] is logout.", currentUser.getUsername());
         currentUser.clear();
     }
 

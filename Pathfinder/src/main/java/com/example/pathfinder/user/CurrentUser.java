@@ -12,6 +12,7 @@ import org.springframework.web.context.annotation.SessionScope;
 @Setter
 public class CurrentUser {
 
+    private Long id;
     private String username;
     private boolean loggedIn;
 
@@ -20,6 +21,8 @@ public class CurrentUser {
         username = null;
     }
 
-
+    public boolean isAnonymous(){
+        return !isLoggedIn();
+    }
 
 }

@@ -15,13 +15,13 @@ private final RouteRepository routeRepository;
         this.routeRepository = routeRepository;
     }
 
-    //public List<Route> getMostCommented(){
-     //   return routeRepository.findByCommentsSize().get(0);
-    //}
-
-
-    public MostCommentedRouteView getMostCommented(){
-        Route route = this.routeRepository.findByCommentsSize().get(0);
-      return MostCommentedRouteView.fromRoute(route);
+    public List<Route> getMostCommented(){
+        return routeRepository.findByCommentsSize();
     }
+
+//
+//    public MostCommentedRouteView getMostCommented(){
+//        Route route = this.routeRepository.findByCommentsSize().get(0);
+//      return MostCommentedRouteView.fromRoute(route);
+//    }
 }

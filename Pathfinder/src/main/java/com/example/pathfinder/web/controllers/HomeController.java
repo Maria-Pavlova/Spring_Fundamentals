@@ -17,7 +17,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model){
-        model.addAttribute("mostCommented", routeService.getMostCommented());
+        model.addAttribute("mostCommented", routeService.getMostCommented().get(0));
         return "index";
     }
 

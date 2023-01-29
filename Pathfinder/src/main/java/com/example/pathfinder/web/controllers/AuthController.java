@@ -45,12 +45,12 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public String login() {
+    public String getLogin() {
         return "/login";
     }
 
     @PostMapping("/login")
-    public String loginConfirm(UserLoginDto userLoginDto){
+    public String login(UserLoginDto userLoginDto){
         userService.loginUser(userLoginDto);
         return "redirect:/";
     }
@@ -61,5 +61,11 @@ public class AuthController {
         return "profile";
         //TODO
 
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        userService.logout();
+        return "redirect:/";
     }
 }
