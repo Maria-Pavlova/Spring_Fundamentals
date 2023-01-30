@@ -1,6 +1,6 @@
 package com.example.pathfinder.service;
 
-import com.example.pathfinder.models.dto.UserDetailsDto;
+import com.example.pathfinder.models.dto.view.UserDetailsView;
 import com.example.pathfinder.models.dto.UserLoginDto;
 import com.example.pathfinder.models.dto.UserRegistrationDto;
 import com.example.pathfinder.models.entities.User;
@@ -11,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
 
@@ -61,10 +60,11 @@ public class UserService {
         }
     }
 
-    public UserDetailsDto getUserProfile(String username){
+    public UserDetailsView getUserProfile(String username){
+     //   Long currentUserId = currentUser.getId();
         String userUsername = currentUser.getUsername();
         Optional<User> user = userRepository.findByUsername(userUsername);
-        return modelMapper.map(user, UserDetailsDto.class);
+        return modelMapper.map(user, UserDetailsView.class);
     }
 
 

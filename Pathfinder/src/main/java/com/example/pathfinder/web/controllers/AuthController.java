@@ -1,6 +1,5 @@
 package com.example.pathfinder.web.controllers;
 
-import com.example.pathfinder.models.dto.UserDetailsDto;
 import com.example.pathfinder.models.dto.UserLoginDto;
 import com.example.pathfinder.models.dto.UserRegistrationDto;
 import com.example.pathfinder.service.UserService;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,15 +55,15 @@ public class AuthController {
         return "redirect:/";
     }
 
-    @GetMapping("/profile")
-    public String profile(Model model){
-        model.addAttribute("userDetailsDto", new UserDetailsDto());
+    @GetMapping("users/profile/{username}")
+    public String profile(@PathVariable String username, Model model){
+        model.addAttribute("userProfile", userService.getUserProfile(username));
         return "profile";
-        //TODO
+
 
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/users/logout")
     public String logout(){
         userService.logout();
         return "redirect:/";

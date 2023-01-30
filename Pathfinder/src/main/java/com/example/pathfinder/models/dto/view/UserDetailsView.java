@@ -1,5 +1,6 @@
-package com.example.pathfinder.models.dto;
+package com.example.pathfinder.models.dto.view;
 
+import com.example.pathfinder.models.enums.Level;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailsDto {
+public class UserDetailsView {
 
     private String fullName;
     private String username;
-    private int age;
+    private Integer age;
+    private Level level;
 }
