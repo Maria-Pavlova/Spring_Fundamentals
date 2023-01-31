@@ -1,24 +1,33 @@
 package com.example.pathfinder.web.controllers;
 
-import com.example.pathfinder.models.dto.view.MostCommentedRouteView;
+import com.example.pathfinder.service.PictureService;
 import com.example.pathfinder.service.RouteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
     private final RouteService routeService;
+    private final PictureService pictureService;
 
-    public HomeController(RouteService routeService) {
+    @Autowired
+    public HomeController(RouteService routeService, PictureService pictureService) {
         this.routeService = routeService;
+        this.pictureService = pictureService;
     }
 
     @GetMapping("/")
     public String home(Model model){
         model.addAttribute("mostCommented", routeService.getMostCommented().get(0));
+        model.addAttribute("pictures", pictureService.findAllUrls());
         return "index";
+    }
+
+    @GetMapping("/about")
+    public String about(){
+        return "about";
     }
 
     // if use baseController

@@ -1,4 +1,4 @@
-package com.example.pathfinder.models.dto;
+package com.example.pathfinder.models.dto.bindingModels;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

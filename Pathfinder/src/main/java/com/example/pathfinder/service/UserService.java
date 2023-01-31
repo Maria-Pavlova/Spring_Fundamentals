@@ -1,8 +1,8 @@
 package com.example.pathfinder.service;
 
 import com.example.pathfinder.models.dto.view.UserDetailsView;
-import com.example.pathfinder.models.dto.UserLoginDto;
-import com.example.pathfinder.models.dto.UserRegistrationDto;
+import com.example.pathfinder.models.dto.bindingModels.UserLoginDto;
+import com.example.pathfinder.models.dto.bindingModels.UserRegistrationDto;
 import com.example.pathfinder.models.entities.User;
 import com.example.pathfinder.models.enums.Level;
 import com.example.pathfinder.repositories.UserRepository;
@@ -61,7 +61,6 @@ public class UserService {
     }
 
     public UserDetailsView getUserProfile(String username){
-     //   Long currentUserId = currentUser.getId();
         String userUsername = currentUser.getUsername();
         Optional<User> user = userRepository.findByUsername(userUsername);
         return modelMapper.map(user, UserDetailsView.class);

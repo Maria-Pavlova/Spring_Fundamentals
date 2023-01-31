@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,6 +38,7 @@ public class Route extends BaseEntity{
     private String videoUrl;
 
     @ManyToMany
+    @Fetch(FetchMode.JOIN)
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "route", targetEntity = Comment.class, cascade = CascadeType.ALL)

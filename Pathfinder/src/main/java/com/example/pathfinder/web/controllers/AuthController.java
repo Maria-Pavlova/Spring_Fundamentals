@@ -1,7 +1,7 @@
 package com.example.pathfinder.web.controllers;
 
-import com.example.pathfinder.models.dto.UserLoginDto;
-import com.example.pathfinder.models.dto.UserRegistrationDto;
+import com.example.pathfinder.models.dto.bindingModels.UserLoginDto;
+import com.example.pathfinder.models.dto.bindingModels.UserRegistrationDto;
 import com.example.pathfinder.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
