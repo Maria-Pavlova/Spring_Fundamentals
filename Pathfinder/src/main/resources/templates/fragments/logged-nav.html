@@ -1,0 +1,17 @@
+<nav class="main-nav">
+    <ul>
+        <th:block th:if="${@currentUser.isLoggedIn()}" th:object="${@currentUser}"></th:block>
+        <li>
+            <a href="routes/add">Add new route</a>
+        </li>
+        <li>
+            <a th:href="@{/users/profile/{id}(id=${@currentUser.getUsername()})}">Profile</a>
+        </li>
+        <li>
+            <a href="/">Admin</a>
+        </li>
+        <li>
+            <a href="users/logout">Logout</a>
+        </li>
+    </ul>
+</nav>
