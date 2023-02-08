@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -24,7 +25,7 @@ public class Ship extends BaseEntity{
     @Column(nullable = false)
     private Long power;
     @Column(nullable = false)
-    private Date created;
+    private LocalDate created;
     @ManyToOne
     private Category category;
     @ManyToOne

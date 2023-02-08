@@ -1,5 +1,6 @@
 package com.example.battleships.models.dto.bindingModels;
 
+import com.example.battleships.utils.validation.FieldsMatch;
 import com.example.battleships.utils.validation.UniqueUserEmail;
 import com.example.battleships.utils.validation.UniqueUserName;
 import jakarta.validation.constraints.Email;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
+@FieldsMatch(first = "password", second = "confirmPassword", message = "Passwords do not match.")
 public class UserRegisterModel implements Serializable {
     @NotNull
     @Size(min = 3, max = 10)

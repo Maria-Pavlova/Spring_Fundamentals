@@ -2,6 +2,7 @@ package com.example.battleships.web.controllers;
 
 import com.example.battleships.models.dto.bindingModels.UserLoginModel;
 import com.example.battleships.models.dto.bindingModels.UserRegisterModel;
+import com.example.battleships.security.CurrentUser;
 import com.example.battleships.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final CurrentUser currentUser;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, CurrentUser currentUser) {
         this.userService = userService;
+        this.currentUser = currentUser;
     }
 
     @ModelAttribute("userModel")
@@ -29,6 +32,9 @@ public class UserController {
 
     @GetMapping("/register")
     public String getRegister(){
+        if (currentUser.isLoggedIn()){
+            return "redirect:/home";
+        }
         return "register";
     }
 
@@ -36,7 +42,9 @@ public class UserController {
     public String register(@Valid UserRegisterModel userModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes){
-
+        if (currentUser.isLoggedIn()){
+            return "redirect:/home";
+        }
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
@@ -50,8 +58,12 @@ public class UserController {
     public void initLoginModel(Model model){
         model.addAttribute("loginModel", new UserLoginModel());
     }
+
     @GetMapping("/login")
     public String getLogin(){
+        if (currentUser.isLoggedIn()){
+            return "redirect:/home";
+        }
         return "login";
     }
 
@@ -59,6 +71,9 @@ public class UserController {
     public String login(@Valid UserLoginModel loginModel,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes){
+        if (currentUser.isLoggedIn()){
+            return "redirect:/home";
+        }
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("loginModel", loginModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginModel", bindingResult);
@@ -75,6 +90,9 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout() {
+        if (!currentUser.isLoggedIn()){
+            return "redirect:/";
+        }
         userService.logout();
         return "redirect:/";
     }
