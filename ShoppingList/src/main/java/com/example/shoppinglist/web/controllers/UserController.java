@@ -79,12 +79,8 @@ public class UserController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginModel", bindingResult);
             return "redirect:/users/login";
         }
-        if (!userService.isAuthenticateAndLogin(loginModel)){
-            redirectAttributes.addFlashAttribute("loginModel", loginModel);
-            redirectAttributes.addFlashAttribute("notPresent", true);
-            return "redirect:/users/login";
-        }
-        userService.isAuthenticateAndLogin(loginModel);
+
+        userService.login(loginModel);
         return "redirect:/home";
     }
 

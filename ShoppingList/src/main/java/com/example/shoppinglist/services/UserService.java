@@ -32,38 +32,25 @@ public class UserService {
 
     public void registerUser(UserRegisterModel userModel) {
 
-        if (userModel.getPassword().equals(userModel.getConfirmPassword())){
-            User user = modelMapper.map(userModel, User.class);
-            user.setPassword(passwordEncoder.encode(userModel.getPassword()));
-            userRepository.save(user);
-        }
+        User user = modelMapper.map(userModel, User.class);
+        user.setPassword(passwordEncoder.encode(userModel.getPassword()));
+        userRepository.save(user);
+
     }
 
-    public boolean isAuthenticateAndLogin(UserLoginModel userLoginModel){
-        Optional<User> optionalUser = userRepository.findByUsername(userLoginModel.getUsername());
-
-        if (optionalUser.isEmpty()){
-            LOGGER.info("User with name [{}] not found.", userLoginModel.getUsername());
-            return false;
-        }
-        String  rawPassword = userLoginModel.getPassword();
-        String  encodedPassword  = optionalUser.get().getPassword();
-
-        if (passwordEncoder.matches(rawPassword, encodedPassword)) {
-            login(optionalUser.get());
-            LOGGER.info("User with name [{}] logged in.", userLoginModel.getUsername());
-            return true;
-        }
-        return false;
+    public void login(UserLoginModel userLoginModel) {
+        User user = findByUsername(userLoginModel.getUsername()).get();
+        currentUser.setUsername(user.getUsername());
+        currentUser.setLoggedIn(true);
     }
 
-    public void logout(){
+    public void logout() {
         currentUser.clear();
     }
 
-    private void login(User user) {
-        currentUser.setUsername(user.getUsername());
-        currentUser.setLoggedIn(true);
 
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
+
 }
