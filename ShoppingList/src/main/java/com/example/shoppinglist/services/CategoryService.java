@@ -27,5 +27,9 @@ public class CategoryService {
                     .toList());
         }
     }
+
+    public Category findByName(CategoryName category) {
+        return categoryRepository.findByName(category);
+    }
 }
 

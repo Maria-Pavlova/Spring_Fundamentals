@@ -1,42 +1,40 @@
 package com.example.shoppinglist.web.controllers;
 
 import com.example.shoppinglist.security.CurrentUser;
+import com.example.shoppinglist.services.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class HomeController {
 
     private final CurrentUser currentUser;
+    private final ProductService productService;
 
-    public HomeController(CurrentUser currentUser) {
+    public HomeController(CurrentUser currentUser, ProductService productService) {
         this.currentUser = currentUser;
+        this.productService = productService;
     }
 
     @GetMapping("/")
-    public String index(){
-        if (currentUser.isLoggedIn()){
+    public String index() {
+        if (currentUser.isLoggedIn()) {
             return "redirect:/home";
         }
         return "index";
     }
 
     @GetMapping("/home")
-    public String home(Model model){
+    public String home(Model model) {
 
-        if (!currentUser.isLoggedIn()){
+        if (!currentUser.isLoggedIn()) {
             return "redirect:/";
         }
-//        model.addAttribute("attacker", shipService.findAllShipsOwnedByAttacker());
-//        model.addAttribute("defender", shipService.findAllShipsOwnedByDefender());
-//        model.addAttribute("allShips", shipService.findAllShips());
+        model.addAttribute("products", productService.findAll());
+        model.addAttribute("totalPriceOfProducts", productService.getTotalPrice());
+
         return "home";
     }
-//
-//    @ModelAttribute("battleModel")
-//    public BattleModel initBattle(){
-//        return new BattleModel();
-//    }
+
 }
