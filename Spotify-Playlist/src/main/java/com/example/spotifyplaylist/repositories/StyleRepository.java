@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StyleRepository extends JpaRepository<Style, Long> {
-    Style findByName(StyleName category);
+
+    Style findByName(StyleName styleName);
 }

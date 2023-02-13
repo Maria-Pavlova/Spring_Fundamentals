@@ -1,13 +1,11 @@
 package com.example.spotifyplaylist.models.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -15,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -26,10 +24,16 @@ public class User extends BaseEntity{
     @Column(name = "email", nullable = false)
     private String email;
 
-    @ManyToMany
-    private Set<Song> playlist;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Song> playlist = new HashSet<>();
 
 
+    public void addSongToPlaylist(Song song) {
+        this.playlist.add(song);
+    }
 
+    public void removeAll(Set<Song> playlist) {
+        this.playlist.removeAll(playlist);
+    }
 
 }

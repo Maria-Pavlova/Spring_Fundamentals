@@ -10,16 +10,16 @@ import java.util.Arrays;
 
 @Service
 public class StyleService {
-    private final StyleRepository categoryRepository;
+    private final StyleRepository styleRepository;
 
-    public StyleService(StyleRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public StyleService(StyleRepository styleRepository) {
+        this.styleRepository = styleRepository;
     }
 
     @PostConstruct
     private void postConstruct() {
-        if (categoryRepository.count() == 0) {
-            categoryRepository.saveAllAndFlush(Arrays.stream(StyleName.values())
+        if (styleRepository.count() == 0) {
+            styleRepository.saveAllAndFlush(Arrays.stream(StyleName.values())
                     .map(categoryName -> Style.builder()
                             .name(categoryName)
                             .description("")
@@ -28,8 +28,10 @@ public class StyleService {
         }
     }
 
-    public Style findByName(StyleName category) {
-        return categoryRepository.findByName(category);
+    public Style findByName(StyleName styleName) {
+        return styleRepository.findByName(styleName);
     }
+
+
 }
 
