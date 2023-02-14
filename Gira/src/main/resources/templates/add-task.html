@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head}"></head>
+<body>
+<header th:insert="~{fragments/header}"></header>
+
+<main class="content-wrap">
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Task</span></h1>
+    <hr class="hr-3 w-25 bg-white"/>
+    <form class="mx-auto w-25 bg-blur" th:method="post" th:action="@{/tasks/add}" th:object="${taskModel}">
+        <div class="form-group">
+            <div class="label-holder textCol d-flex justify-content-center">
+                <label for="name" class="h4 mb-2">Name</label>
+            </div>
+            <input type="text" class="form-control"
+                   id="name"
+                   name="name"
+                   th:value="*{name}"
+                   th:errorclass="is-invalid"
+            />
+            <small th:errors="*{name}" class="text-danger invalid-feedback">Name length must be between 3 and 20
+                characters</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder textCol d-flex justify-content-center">
+                <label for="description" class="h4 mb-2">Description</label>
+            </div>
+            <input type="text" class="form-control"
+                   id="description"
+                   name="description"
+                   th:value="*{description}"
+                   th:errorclass="is-invalid"/>
+            <small class="text-danger invalid-feedback">Description length must be minimum 5 characters</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder  textCol d-flex justify-content-center">
+                <label for="dueDate" class="h4 mb-2">Due Date</label>
+            </div>
+            <input type="date" class="form-control"
+                   id="dueDate"
+                   name="dueDate"
+                   th:value="*{dueDate}"
+                   th:errorclass="is-invalid"/>
+            <small class="text-danger invalid-feedback">Date cannot be in the past</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder  textCol d-flex justify-content-center">
+                <label for="classification" class="h4 mb-2">Classification</label>
+            </div>
+            <select type="text" class="form-control"
+                    id="classification"
+                    name="classification"
+                    th:errorclass="is-invalid">
+                <option value="">Select Classification</option>
+                <option th:each="c : ${T(com.example.gira.models.enums.ClassificationName).values()}"
+                        th:text="${c}"
+                        th:value="${c}"></option>
+            </select>
+            <small class="text-danger invalid-feedback">Classification is required!</small>
+        </div>
+
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="button btn-warning  mb-3" value="Register">Add Task</button>
+        </div>
+    </form>
+</main>
+<footer th:insert="~{fragments/footer}"></footer>
+</div>
+
+
+</body>
+</html>
