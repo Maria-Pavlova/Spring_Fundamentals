@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head}"></head>
+<body>
+<header th:insert="~{fragments/header}"></header>
+    <main>
+        <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Register</span></h1>
+        <hr class="hr-3"/>
+        <form class="mx-auto w-25 bg-blur" th:method="post" th:action="@{/users/register}" th:object="${userModel}">
+            <div class="form-group">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="username" class="h4 mb-2 text-white">Username</label>
+                </div>
+                <input type="text" class="form-control"
+                       id="username"
+                       name="username"
+                       th:value="*{username}"
+                       th:errorclass="is-invalid"/>
+                <small class="text-danger invalid-feedback" th:errors="*{username}">Username must be more than 2 characters.</small>
+            </div>
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="email" class="h4 mb-2">Email</label>
+                </div>
+                <input type="email" class="form-control"
+                       id="email"
+                       name="email"
+                       th:value="*{email}"
+                       th:errorclass="is-invalid"/>
+                <small class="invalid-feedback text-danger">Email must be valid</small>
+            </div>
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="budget" class="h4 mb-2">Budget</label>
+                </div>
+                <input type="budget" class="form-control"
+                       id="budget"
+                       name="budget"
+                       th:value="*{budget}"
+                       th:errorclass="is-invalid"/>
+                <small class="invalid-feedback text-danger">Budget must be valid</small>
+            </div>
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="password" class="h4 mb-2">Password</label>
+                </div>
+                <input type="password" class="form-control"
+                       id="password"
+                       name="password"
+                       th:field="*{password}"
+                       th:errorclass="is-invalid"/>
+                <small class="invalid-feedback text-danger">Password must be more than 2 characters.</small>
+            </div>
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+                </div>
+                <input type="password" class="form-control"
+                       id="confirmPassword"
+                       name="confirmPassword"
+                       th:field="*{confirmPassword}"
+                       th:errorclass="is-invalid"/>
+                <small th:errors="*{confirmPassword}" class="invalid-feedback text-danger">Password must be more than 2 characters.</small>
+            </div>
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn btn-secondary text-white mb-3" value="Register">Register</button>
+            </div>
+        </form>
+    </main>
+<footer class="footer bg-transparent  py-2" th:insert="~{fragments/footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head}"></head>
+<body>
+<header th:insert="~{fragments/header}"  xmlns:h="http://xmlns.jcp.org/jsf/html"></header>
+    <main>
+        <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Products</span></h1>
+        <hr class="hr-3"/>
+        <div class="bg-blur container w-50" th:each="i : ${items}" th:object="${i}">
+            <div class="row mb-4 d-flex flex-column text-center">
+                <a th:href="@{/items/details/{id} (id = *{id})}">
+                    <img library="img" th:src="'/img/'+ *{gender.name()} + '-' + *{category.name.name()} +'.jpg'"
+                                                                      class="img-thumbnail" width="200" height="200"/>
+                </a>
+                 <h5 class="text-center" th:text="*{name}"></h5>
+                <h2 class="text-center" th:text="*{price}"></h2>
+            </div>
+        </div>
+    </main>
+    <span style="visibility: hidden">...</span>
+    <th:include src="templates/footer.xhtml"/>
+</body>
+</html>
