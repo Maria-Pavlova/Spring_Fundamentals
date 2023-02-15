@@ -48,7 +48,7 @@ public class AlbumController {
         return "redirect:/home";
     }
 
-    @GetMapping("/delete{id}")
+    @GetMapping("/delete/{id}")
     public String deleteAlbum(@PathVariable Long id){
         if (currentUser.isAnonymous()){
             return "redirect:/";

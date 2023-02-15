@@ -9,7 +9,8 @@
     <div class="row">
         <div th:each="a : ${albums}" th:object="${a}" class="col-md-3">
             <div  class="card mb-4 box-shadow">
-                <img th:src="'/img/' + *{artist.name.name().toLowerCase()} + '.jpg'" class="card-img-top" alt="Thumbnail [100%x225]"
+<!--                <img th:src="'/img/' + *{artist.name.name().toLowerCase()} + '.jpg'" class="card-img-top" alt="Thumbnail [100%x225]"-->
+                <img th:src="*{imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
                      data-holder-rendered="true"
                      style="height: 225px; width: 100%; display: block;">
                 <div class="card-body">
