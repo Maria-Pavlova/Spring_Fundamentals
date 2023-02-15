@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head}"></head>
+<body>
+<header th:insert="~{fragments/header}"></header>
+
+<main class="p-5 align-content-center bg-blur my-main">
+    <h2 th:text="|Total sold copies of all albums: ${totalCopies}|" class="text-light border-bottom"></h2>
+    <div class="row">
+        <div th:each="a : ${albums}" th:object="${a}" class="col-md-3">
+            <div  class="card mb-4 box-shadow">
+                <img th:src="'/img/' + *{artist.name.name().toLowerCase()} + '.jpg'" class="card-img-top" alt="Thumbnail [100%x225]"
+                     data-holder-rendered="true"
+                     style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p th:text="|Name: *{name}|" class="card-text border-bottom "></p>
+                        <p th:text="|Artist: *{artist.name}|" class="card-text border-bottom "></p>
+                        <p th:text="|Genre: *{genre}|" class="card-text border-bottom "></p>
+                        <p th:text="|Price: *{price}|" class="card-text border-bottom "></p>
+                        <p th:text="|Release Date: *{releasedDate}|" class="card-text border-bottom"></p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a th:href="@{/albums/delete/{id} (id=*{id})}" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        </div>
+                        <small th:text="|*{copies} copies|" class="text-muted"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer bg-blur">
+    <div class="container-fluid text-center">
+        <div class="h5 text-white">
+            &copy;SoftUni Spring Team 2021. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>

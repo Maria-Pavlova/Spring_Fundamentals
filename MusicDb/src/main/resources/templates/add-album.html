@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head}"></head>
+<body>
+<header th:insert="~{fragments/header}"></header>
+
+<main class="p-5 bg-blur text-center my-main">
+    <h1 class="text-light border-bottom">Add Album</h1>
+    <div class="d-flex justify-content-center">
+        <form th:action="@{/albums/add}" th:method="POST" th:object="${addAlbumModel}"
+              class="text-light">
+            <div class="form-row m-5">
+                <div class="col">
+                    <label for="name">Album name</label>
+                    <input name="name"
+                           id="name"
+                           th:field="*{name}"
+                           th:errorclass="is-invalid"
+                           type="text" class="form-control" placeholder="Album name">
+                    <small id="nameError" class="form-text bg-danger rounded invalid-feedback">Name must be between 3 and 20
+                        characters</small>
+                </div>
+                <div class="col">
+                    <label for="imageUrl">Image Url</label>
+                    <input name="imageUrl"
+                           id="imageUrl"
+                           th:field="*{imageUrl}"
+                           th:errorclass="is-invalid"
+                           type="text" class="form-control" placeholder="Image Url">
+                    <small id="imageUrlError" class="form-text bg-danger rounded invalid-feedback">Image url must be more than 5
+                        characters</small>
+                </div>
+            </div>
+            <div class="form-row m-5">
+                <div class="col">
+                    <label for="price">Price</label>
+                    <input name="price"
+                           id="price"
+                           th:field="*{price}"
+                           th:errorclass="is-invalid"
+                           type="number" class="form-control" placeholder="Price">
+                    <small id="priceError" class="form-text bg-danger rounded invalid-feedback">Price must be positive</small>
+                </div>
+                <div class="col">
+                    <label for="copies">Copies</label>
+                    <input name="copies"
+                           id="copies"
+                           th:field="*{copies}"
+                           th:errorclass="is-invalid"
+                           type="number" class="form-control" placeholder="Copies">
+                    <small id="copiesError" class="form-text bg-danger rounded invalid-feedback">Copies must be positive</small>
+                </div>
+            </div>
+            <div class="form-row m-5">
+                <div class="col">
+                    <label for="releasedDate">Release date</label>
+                    <input name="releasedDate"
+                           id="releasedDate"
+                           th:field="*{releasedDate}"
+                           th:errorclass="is-invalid"
+                           type="date" class="form-control" placeholder="Release date">
+                    <small id="releaseDateError" class="form-text bg-danger rounded invalid-feedback">Release date cannot be in the
+                        future</small>
+                </div>
+                <div class="col">
+                    <label for="producer">Producer</label>
+                    <input name="producer"
+                           id="producer"
+                           th:field="*{producer}"
+                           type="text" class="form-control" placeholder="Producer">
+                </div>
+            </div>
+            <div class="form-row m-5">
+                <div class="col">
+                    <label for="artist">Artist</label>
+                    <select name="artist" id="artist" th:errorclass="is-invalid" class="custom-select">
+                        <option value="" selected>Select Artist</option>
+                        <option th:each="a : ${T(com.example.musicdb.models.enums.Singer).values()}"
+                                th:text="${a}"
+                                th:value="${a}"></option>
+                    </select>
+                    <small id="artistError" class="form-text bg-danger rounded invalid-feedback">You must select artist</small>
+                </div>
+                <div class="col">
+                    <label for="genre">Genre</label>
+                    <select name="genre" id="genre" th:errorclass="is-invalid" class="custom-select">
+                        <option value="" selected>Select genre</option>
+                        <option th:each="g : ${T(com.example.musicdb.models.enums.Genre).values()}"
+                                th:text="${g}"
+                                th:value="${g}"></option>
+                    </select>
+                    <small id="genreError" class="form-text bg-danger rounded invalid-feedback">You must select genre</small>
+                </div>
+            </div>
+
+            <div class="form-row m-5">
+                <div class="col">
+                    <label for="description">Description</label>
+                    <textarea name="description"
+                              id="description"
+                              th:field="*{description}"
+                              th:errorclass="is-invalid"
+                              type="text" class="form-control" placeholder="Description"></textarea>
+                    <small id="descriptionError" class="form-text bg-danger rounded invalid-feedback">Description length must be more than 5 characters</small>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-primary btn-block w-50" type="submit">Add New Album</button>
+            </div>
+        </form>
+    </div>
+</main>
+<footer class="footer bg-blur">
+    <div class="container-fluid text-center">
+        <div class="h5 text-white">
+            &copy;SoftUni Spring Team 2021. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>
