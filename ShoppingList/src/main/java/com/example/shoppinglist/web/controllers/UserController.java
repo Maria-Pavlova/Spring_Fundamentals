@@ -26,12 +26,12 @@ public class UserController {
     }
 
     @ModelAttribute("userModel")
-    public void initUserModel(Model model){
+    public void initUserModel(Model model) {
         model.addAttribute("userModel", new UserRegisterModel());
     }
 
     @GetMapping("/register")
-    public String getRegister(){
+    public String getRegister() {
         if (currentUser.isLoggedIn()){
             return "redirect:/home";
         }
@@ -41,26 +41,29 @@ public class UserController {
     @PostMapping("/register")
     public String register(@Valid UserRegisterModel userModel,
                            BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes){
+                           RedirectAttributes redirectAttributes) {
+
         if (currentUser.isLoggedIn()){
             return "redirect:/home";
         }
-        if (bindingResult.hasErrors()){
+
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
             return "redirect:/users/register";
         }
-
         userService.registerUser(userModel);
         return "redirect:/users/login";
     }
+
     @ModelAttribute("loginModel")
-    public void initLoginModel(Model model){
+    public void initLoginModel(Model model) {
         model.addAttribute("loginModel", new UserLoginModel());
     }
 
+
     @GetMapping("/login")
-    public String getLogin(){
+    public String getLogin() {
         if (currentUser.isLoggedIn()){
             return "redirect:/home";
         }
@@ -70,11 +73,13 @@ public class UserController {
     @PostMapping("/login")
     public String login(@Valid UserLoginModel loginModel,
                         BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes){
+                        RedirectAttributes redirectAttributes) {
+
         if (currentUser.isLoggedIn()){
             return "redirect:/home";
         }
-        if (bindingResult.hasErrors()){
+
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("loginModel", loginModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginModel", bindingResult);
             return "redirect:/users/login";

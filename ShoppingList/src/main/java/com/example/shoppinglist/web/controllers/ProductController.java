@@ -21,13 +21,12 @@ public class ProductController {
     }
 
     @ModelAttribute("productModel")
-    public AddProductModel productModel(){
+    public AddProductModel productModel() {
         return new AddProductModel();
     }
 
     @GetMapping("/add")
-    public String getAddForm(){
-
+    public String getAddForm() {
         if (!currentUser.isLoggedIn()){
             return "redirect:/";
         }
@@ -37,12 +36,13 @@ public class ProductController {
     @PostMapping("/add")
     public String addProduct(@Valid AddProductModel productModel,
                              BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes){
+                             RedirectAttributes redirectAttributes) {
 
         if (!currentUser.isLoggedIn()){
             return "redirect:/";
         }
-        if (bindingResult.hasErrors()){
+
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("productModel", productModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productModel", bindingResult);
             return "redirect:/products/add";
@@ -52,7 +52,7 @@ public class ProductController {
     }
 
     @GetMapping("/buy/{id}")
-    public String buy(@PathVariable Long id){
+    public String buy(@PathVariable Long id) {
         if (!currentUser.isLoggedIn()){
             return "redirect:/";
         }
@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     @GetMapping("/buyAll")
-    public String buyAll(){
+    public String buyAll() {
         if (!currentUser.isLoggedIn()){
             return "redirect:/";
         }

@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String index() {
-        if (currentUser.isLoggedIn()) {
+        if (currentUser.isLoggedIn()){
             return "redirect:/home";
         }
         return "index";
@@ -27,11 +27,11 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model) {
+       if (!currentUser.isLoggedIn()){
+           return "redirect:/";
+       }
 
-        if (!currentUser.isLoggedIn()) {
-            return "redirect:/";
-        }
-        model.addAttribute("products", productService.findAll());
+        model.addAttribute("products", productService.findByCategory());
         model.addAttribute("totalPriceOfProducts", productService.getTotalPrice());
 
         return "home";

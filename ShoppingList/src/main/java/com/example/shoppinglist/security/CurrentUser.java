@@ -27,16 +27,19 @@ public class CurrentUser {
         this.loggedIn = loggedIn;
         return this;
     }
-    public void clear(){
+
+    public void clear() {
         loggedIn = false;
         username = null;
     }
 
-    public boolean isAnonymous(){
+    public boolean isAnonymous() {
         return !isLoggedIn();
+    }
+
+
     }
 
 
 
 
-}

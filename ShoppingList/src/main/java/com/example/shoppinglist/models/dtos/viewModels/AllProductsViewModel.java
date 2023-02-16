@@ -1,16 +1,16 @@
 package com.example.shoppinglist.models.dtos.viewModels;
 
-import com.example.shoppinglist.models.entities.Category;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class AllProductsViewModel {
-    private long id;
-    private Category category;
-    private String name;
-    private BigDecimal price;
+
+   List<ProductViewModel> foodProducts;
+   List<ProductViewModel> drinkProducts;
+   List<ProductViewModel> householdProducts;
+   List<ProductViewModel> otherProducts;
 }
