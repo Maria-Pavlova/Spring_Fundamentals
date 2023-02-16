@@ -1,11 +1,8 @@
 package com.example.likebook.models.entities;
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Getter
 @Setter
@@ -22,13 +19,9 @@ public class Post extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Mood mood;
 
-    public Post(String content, User user, Integer likes, Mood mood) {
-        this.content = content;
-        this.user = user;
-        this.likes = 0;
-        this.mood = mood;
-    }
-
+    //    @ManyToMany
+//    @Fetch(FetchMode.JOIN)
+//    private Set<User> userLikes;
 
     }
 

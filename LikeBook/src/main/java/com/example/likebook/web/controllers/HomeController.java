@@ -35,7 +35,6 @@ public class HomeController {
         model.addAttribute("allPosts", postService.findOtherUsersPosts());
         model.addAttribute("allPostsCount", postService.findCountOtherUsersPosts());
 
-
         return "home";
     }
 

@@ -18,16 +18,16 @@
                       id="content"
                       name="content"
                       th:value="*{content}"
-                      th:errorclass="is-invalid"
+                      th:errorclass="'is-invalid bg-danger'"
             ></textarea>
-            <small class="text-danger invalid-feedback">Content length must be between 2 and 150 </small>
+            <small class="text-danger invalid-feedback">Content length must be between 2 and 50</small>
         </div>
 
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="mood" class="h4 mb-2">Mood</label>
             </div>
-            <select class="browser-default custom-select" id="mood" name="mood" th:errorclass="is-invalid">
+            <select class="browser-default custom-select" id="mood" name="mood" th:errorclass="'is-invalid bg-danger'">
                 <option value="">Select mood</option>
                 <option th:each="m : ${T(com.example.likebook.models.enums.MoodName).values()}"
                        th:text="${m}" th:value="${m}"></option>

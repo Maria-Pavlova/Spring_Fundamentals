@@ -53,7 +53,6 @@ public class ProductController {
 
     @GetMapping("/buy/{id}")
     public String buy(@PathVariable Long id){
-
         if (!currentUser.isLoggedIn()){
             return "redirect:/";
         }
@@ -63,7 +62,6 @@ public class ProductController {
 
     @GetMapping("/buyAll")
     public String buyAll(){
-
         if (!currentUser.isLoggedIn()){
             return "redirect:/";
         }
