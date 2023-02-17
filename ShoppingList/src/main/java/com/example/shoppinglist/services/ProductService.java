@@ -8,6 +8,8 @@ import com.example.shoppinglist.models.entities.Product;
 import com.example.shoppinglist.models.enums.CategoryName;
 import com.example.shoppinglist.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,7 +21,8 @@ public class ProductService {
     private final ModelMapper modelMapper;
     private final CategoryService categoryService;
 
-    public ProductService(ProductRepository productRepository, ModelMapper modelMapper, CategoryService categoryService) {
+    public ProductService(ProductRepository productRepository, ModelMapper modelMapper,
+                          CategoryService categoryService) {
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
         this.categoryService = categoryService;
@@ -31,30 +34,43 @@ public class ProductService {
         productRepository.saveAndFlush(product);
     }
 
-//    public List<AllProductsViewModel> findAll() {
-//       return productRepository.findAll()
-//                .stream()
-//                .map(product -> modelMapper.map(product, AllProductsViewModel.class))
-//                .toList();
-//    }
 
     public AllProductsViewModel findByCategory(){
-        Category footCategory = categoryService.findByName(CategoryName.FOOD);
-        Category drinkCategory = categoryService.findByName(CategoryName.DRINK);
-        Category otherCategory = categoryService.findByName(CategoryName.OTHER);
-        Category householdCategory = categoryService.findByName(CategoryName.HOUSEHOLD);
 
-        List<Product> food = this.productRepository.findAllByCategory(footCategory).orElse(null);
-        List<Product> drinks = this.productRepository.findAllByCategory(drinkCategory).orElse(null);
-        List<Product> other = this.productRepository.findAllByCategory(otherCategory).orElse(null);
-        List<Product> household = this.productRepository.findAllByCategory(householdCategory).orElse(null);
+        List<Product> food = this.productRepository
+                .findAllByCategory(categoryService.findByName(CategoryName.FOOD))
+                .orElse(null);
+
+        List<Product> drinks = this.productRepository
+                .findAllByCategory(categoryService.findByName(CategoryName.DRINK))
+                .orElse(null);
+
+        List<Product> other = this.productRepository
+                .findAllByCategory(categoryService.findByName(CategoryName.OTHER))
+                .orElse(null);
+
+        List<Product> household = this.productRepository
+                .findAllByCategory(categoryService.findByName(CategoryName.HOUSEHOLD)).
+                orElse(null);
 
         AllProductsViewModel products = new AllProductsViewModel();
 
-        products.setFoodProducts(Objects.requireNonNull(food).stream().map(product -> modelMapper.map(product,ProductViewModel.class)).toList());
-        products.setDrinkProducts(Objects.requireNonNull(drinks).stream().map(product -> modelMapper.map(product,ProductViewModel.class)).toList());
-        products.setOtherProducts(Objects.requireNonNull(other).stream().map(product -> modelMapper.map(product,ProductViewModel.class)).toList());
-        products.setHouseholdProducts(Objects.requireNonNull(household).stream().map(product -> modelMapper.map(product,ProductViewModel.class)).toList());
+        products.setFoodProducts(Objects.requireNonNull(food)
+                .stream()
+                .map(product -> modelMapper.map(product,ProductViewModel.class))
+                .toList());
+        products.setDrinkProducts(Objects.requireNonNull(drinks)
+                .stream()
+                .map(product -> modelMapper.map(product,ProductViewModel.class))
+                .toList());
+        products.setOtherProducts(Objects.requireNonNull(other)
+                .stream()
+                .map(product -> modelMapper.map(product,ProductViewModel.class))
+                .toList());
+        products.setHouseholdProducts(Objects.requireNonNull(household)
+                .stream()
+                .map(product -> modelMapper.map(product,ProductViewModel.class))
+                .toList());
         
         return products;
     }
@@ -73,4 +89,11 @@ public class ProductService {
     public void buyAllProducts() {
         productRepository.deleteAll();
     }
+
+    //    public List<AllProductsViewModel> findAll() {
+//       return productRepository.findAll()
+//                .stream()
+//                .map(product -> modelMapper.map(product, AllProductsViewModel.class))
+//                .toList();
+//    }
 }

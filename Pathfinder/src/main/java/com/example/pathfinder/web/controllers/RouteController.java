@@ -23,38 +23,44 @@ public class RouteController {
     }
 
     @GetMapping("/all")
-    public String allRoutes(Model model){
+    public String allRoutes(Model model) {
         model.addAttribute("routes", routeService.findAllRoutes());
         return "routes";
     }
 
     @GetMapping("/details/{id}")
-    public String details(@PathVariable Long id, Model model){
+    public String details(@PathVariable Long id, Model model) {
         model.addAttribute("details", routeService.getDetails(id));
         return "route-details";
     }
 
     @ModelAttribute("addRouteModel")
-    public AddRouteModel addRouteModel(){
+    public AddRouteModel addRouteModel() {
         return new AddRouteModel();
     }
 
     @GetMapping("/add")
-    public String add(){
+    public String add() {
         return "add-route";
     }
 
     @PostMapping("/add")
     public String addRoute(@Valid AddRouteModel addRouteModel,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addRouteModel", addRouteModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addRouteModel", bindingResult);
             return "redirect:/routes/add";
         }
         routeService.addRoute(addRouteModel);
         return "redirect:/routes/all";
-        }
     }
+
+    @GetMapping("/byType/{type}")
+    public String getRouteByCategory(@PathVariable String type, Model model) {
+        model.addAttribute("routesByType",  this.routeService.findByCategory(type) );
+        return "route-byType";
+    }
+}
 
 

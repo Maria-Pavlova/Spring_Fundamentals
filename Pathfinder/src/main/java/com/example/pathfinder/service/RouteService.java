@@ -2,8 +2,10 @@ package com.example.pathfinder.service;
 
 import com.example.pathfinder.models.dto.bindingModels.AddRouteModel;
 import com.example.pathfinder.models.dto.view.RouteDetailsView;
-import com.example.pathfinder.models.dto.view.RouteModel;
+import com.example.pathfinder.models.dto.view.RouteViewModel;
+import com.example.pathfinder.models.entities.Category;
 import com.example.pathfinder.models.entities.Route;
+import com.example.pathfinder.models.enums.CategoryName;
 import com.example.pathfinder.repositories.RouteRepository;
 import com.example.pathfinder.repositories.UserRepository;
 import com.example.pathfinder.user.CurrentUser;
@@ -38,16 +40,17 @@ public class RouteService {
         return routeRepository.findByCommentsSize();
     }
 
-    public List<RouteModel> findAllRoutes() {
+    public List<RouteViewModel> findAllRoutes() {
         return routeRepository.findAll()
-              .stream().map(route -> {
-                            RouteModel routeModel = modelMapper.map(route, RouteModel.class);
+              .stream()
+                .map(route -> {
+                            RouteViewModel routeViewModel = modelMapper.map(route, RouteViewModel.class);
                             if (route.getPicture().isEmpty()){
-                                routeModel.setPictureUrl("/images/pic4.jpg");
+                                routeViewModel.setPictureUrl("/images/pic4.jpg");
                             }else {
-                            routeModel.setPictureUrl(route.getPicture().stream().findFirst().get().getUrl());
+                            routeViewModel.setPictureUrl(route.getPicture().stream().findFirst().get().getUrl());
                             }
-                            return routeModel;
+                            return routeViewModel;
                         })
                 .collect(Collectors.toList());
 
@@ -80,9 +83,24 @@ public class RouteService {
         routeRepository.save(route);
     }
 
-//
-//    public MostCommentedRouteView getMostCommented(){
-//        Route route = this.routeRepository.findByCommentsSize().get(0);
-//      return MostCommentedRouteView.fromRoute(route);
-//    }
+
+    public List<RouteViewModel> findByCategory(String categoryName) {
+
+        Category category = this.categoryService.findByName(CategoryName.valueOf(categoryName.toUpperCase()));
+
+        return routeRepository.findAllByCategories(category).orElseThrow()
+                .stream()
+                .map(route -> {
+                    RouteViewModel routeViewModel = modelMapper.map(route, RouteViewModel.class);
+                    if (route.getPicture().isEmpty()){
+                        routeViewModel.setPictureUrl("/images/pic4.jpg");
+                    }else {
+                        routeViewModel.setPictureUrl(route.getPicture().stream().findFirst().get().getUrl());
+                    }
+                    return routeViewModel;
+                })
+                .toList();
+
+
+    }
 }

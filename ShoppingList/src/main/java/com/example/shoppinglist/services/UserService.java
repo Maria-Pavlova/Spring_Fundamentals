@@ -35,6 +35,7 @@ public class UserService {
         User user = modelMapper.map(userModel, User.class);
         user.setPassword(passwordEncoder.encode(userModel.getPassword()));
         userRepository.save(user);
+        LOGGER.info("User with name [{}] registered.", userModel.getUsername());
 
     }
 
@@ -42,9 +43,11 @@ public class UserService {
         User user = findByUsername(userLoginModel.getUsername()).get();
         currentUser.setUsername(user.getUsername());
         currentUser.setLoggedIn(true);
+        LOGGER.info("User with name [{}] logged in.", userLoginModel.getUsername());
     }
 
     public void logout() {
+        LOGGER.info("User with name [{}] logged out.", currentUser.getUsername());
         currentUser.clear();
     }
 

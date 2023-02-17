@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class RouteModel implements Serializable {
+public class RouteViewModel implements Serializable {
     private Long id;
     private String name;
     private String description;
