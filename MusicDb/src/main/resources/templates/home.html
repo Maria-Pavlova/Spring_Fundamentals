@@ -13,6 +13,11 @@
                 <img th:src="*{imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
                      data-holder-rendered="true"
                      style="height: 225px; width: 100%; display: block;">
+<!--                <img th:with="url=${(a.imageUrl) ?: '/img/madonna.jpg'}"-->
+<!--                     th:src="@{${url}}"-->
+<!--                     class="card-img-top" alt="Thumbnail [100%x225]"-->
+<!--                     data-holder-rendered="true"-->
+<!--                     style="height: 225px; width: 100%; display: block;">-->
                 <div class="card-body">
                     <div class="text-center">
                         <p th:text="|Name: *{name}|" class="card-text border-bottom "></p>

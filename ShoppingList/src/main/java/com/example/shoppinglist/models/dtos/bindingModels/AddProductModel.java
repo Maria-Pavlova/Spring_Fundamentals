@@ -2,7 +2,7 @@ package com.example.shoppinglist.models.dtos.bindingModels;
 
 import com.example.shoppinglist.models.enums.CategoryName;
 import com.example.shoppinglist.utils.validation.UniqueProductName;
-import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -27,7 +27,7 @@ public class AddProductModel implements Serializable {
     @Positive
     private BigDecimal price;
     @NotNull
-    @FutureOrPresent
+    @Future
     private LocalDateTime neededBefore;
     @NotNull
     private CategoryName category;

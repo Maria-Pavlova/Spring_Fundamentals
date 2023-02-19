@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Constraint(validatedBy = UserExistValidator.class)
 public @interface UserExist {
-    String message() default "User does not exist";
+    String message() default "Invalid credentials!";
 
     Class<?>[] groups() default {};
 

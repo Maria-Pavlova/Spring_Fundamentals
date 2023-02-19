@@ -1,6 +1,5 @@
 package com.example.musicdb.models.dtos.bindingModels;
 
-import com.example.musicdb.models.entities.Artist;
 import com.example.musicdb.models.enums.Genre;
 import com.example.musicdb.models.enums.Singer;
 import jakarta.validation.constraints.*;

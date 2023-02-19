@@ -1,4 +1,4 @@
-package com.example.shoppinglist.utils.validation;
+package com.example.exam.utils.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -10,10 +10,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = UniqueUserEmailValidator.class)
-public @interface UniqueUserEmail {
+@Constraint(validatedBy = UniqueUserNameValidator.class)
+public @interface UniqueUserName {
 
-    String message() default "This email address is already taken.";
+    String message() default "Username is already taken!";
 
     Class<?>[] groups() default {};
 

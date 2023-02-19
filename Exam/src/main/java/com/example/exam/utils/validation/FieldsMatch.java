@@ -1,4 +1,4 @@
-package com.example.shoppinglist.utils.validation;
+package com.example.exam.utils.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -9,14 +9,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-@Constraint(validatedBy = UniqueUserEmailValidator.class)
-public @interface UniqueUserEmail {
+@Target(ElementType.TYPE)
+@Constraint(validatedBy = FieldsMatchValidator.class)
+public @interface FieldsMatch {
 
-    String message() default "This email address is already taken.";
+    String first();
+
+    String second();
+
+    String message() default "Password does not match.";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }
