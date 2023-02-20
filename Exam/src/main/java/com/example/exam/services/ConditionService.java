@@ -16,6 +16,7 @@ public class ConditionService {
         this.conditionRepository = conditionRepository;
     }
 
+
     @PostConstruct
     private void postConstruct() {
      if (conditionRepository.count() == 0) {
